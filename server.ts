@@ -908,6 +908,9 @@ app.post("/job", async function (req, res) {
     res.status(401).json({ error: "unrecognized hpc", message: null });
     return;
   }
+  // check if the user can use the HPC
+  var allowedOnHPC = Helper.canAccessHPC(body.user, hpcName);
+  console.log(allowedOnHPC);
 
   try {
     if (!hpc.is_community_account) {
